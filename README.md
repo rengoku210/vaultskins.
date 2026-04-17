@@ -64,6 +64,21 @@ npm run dev
 
 If your PR shows merge conflicts with `main`, pull `main`, keep these files from this branch, then re-run checks:
 
+
+### Fast conflict fix (Windows PowerShell)
+
+From repository root:
+
+```powershell
+pwsh ./scripts/Resolve-VaultSkinsConflicts.ps1
+```
+
+This script will:
+- fetch + merge `origin/main`
+- keep this branch version for critical runtime files
+- stop if non-critical conflicts remain
+- auto-commit when everything is resolved
+
 - `README.md`
 - `backend/src/config/env.js`
 - `backend/src/middleware/auth.js`
