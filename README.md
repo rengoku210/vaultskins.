@@ -44,25 +44,36 @@ SMTP_PASS=
 FIREBASE_SERVICE_ACCOUNT_JSON=
 ```
 
-> On Windows, if `FIREBASE_SERVICE_ACCOUNT_JSON` contains quotes, escape them correctly or load from a file before process startup.
-
 ## Frontend setup (Windows PowerShell)
 
 ```powershell
 cd frontend
 npm install
-@" 
-VITE_API_BASE=http://localhost:4000/api
-"@ | Out-File -Encoding UTF8 .env
+Copy-Item .env.example .env
 npm run dev
 ```
 
 ## Local run checklist
 
-- Ensure `backend/data/` exists (the app now auto-creates it on startup).
+- `backend/data/` is auto-created on startup (prevents SQLite open failures on new machines).
 - Start backend first so frontend API calls don't fail.
 - If you get 403 from sell/buy/dashboard, accept terms first.
 - For Google/Firebase and SMTP flows, supply valid credentials.
+
+## Conflict-resolution note
+
+If your PR shows merge conflicts with `main`, pull `main`, keep these files from this branch, then re-run checks:
+
+- `README.md`
+- `backend/src/config/env.js`
+- `backend/src/middleware/auth.js`
+- `backend/src/middleware/validate.js`
+- `backend/src/routes/auth.routes.js`
+- `backend/src/routes/listings.routes.js`
+- `backend/src/routes/misc.routes.js`
+- `backend/src/services/db.js`
+- `frontend/src/App.jsx`
+- `frontend/src/services/api.js`
 
 ## Notes
 
